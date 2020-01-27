@@ -10,6 +10,10 @@ from WantedModels import WantedModels
 def run(in_execution):
     in_execution = True
 
+    # HeathCheck Ping
+    HEALTH_CHECK_URL = os.getenv('HEALTH_CHECK_URL')
+    requests.get(HEALTH_CHECK_URL+ "/start")
+
     wanted_models = WantedModels(os.getenv('WANTED_MODELS'))
 
     # Get Data
@@ -72,6 +76,7 @@ def run(in_execution):
                     save_notification_time(buffers_file, key)
     
     in_execution = False
+    requests.get(HEALTH_CHECK_URL)
 
 
 def save_notification_time(buffers_file, key):
