@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 from WantedModels import WantedModels
 
 
-def run():
-    load_dotenv()
+def run(in_execution):
+    in_execution = True
 
     wanted_models = WantedModels(os.getenv('WANTED_MODELS'))
 
@@ -70,6 +70,8 @@ def run():
                 res_data = res.json()
                 if (res_data['oneSucceeded']):
                     save_notification_time(buffers_file, key)
+    
+    in_execution = False
 
 
 def save_notification_time(buffers_file, key):
@@ -100,11 +102,20 @@ def is_to_notify(buffers_file, key):
         if(not key in buffers):
             return True
         else:
-            buffer_minutes = int(os.getenv('NOTIFICATION_BUFFER'))
+            buffer_minutes = int(os.getenv('NOTIFICATIONS_BUFFER'))
             maxTime = time.time() - buffer_minutes*60
 
             return buffers[key] < maxTime
 
 
 if __name__ == '__main__':
-    run()
+    load_dotenv()
+    INTERVAL = int(os.getenv('INTERVAL'))
+    in_execution = False
+
+    while True:
+        if(not in_execution):
+            run(in_execution)
+            time.sleep(INTERVAL)
+        else:
+            time.sleep(1)
