@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 from WantedModels import WantedModels
 
 
-def run(in_execution):
-    in_execution = True
+def run():
+    time_start = int(time.time())
 
-    # HeathCheck Ping
+    # HeathChecks start ping
     HEALTH_CHECK_URL = os.getenv('HEALTH_CHECK_URL')
     requests.get(HEALTH_CHECK_URL+ "/start")
 
@@ -75,8 +75,13 @@ def run(in_execution):
                 if (res_data['oneSucceeded']):
                     save_notification_time(buffers_file, key)
     
-    in_execution = False
+    # HeathChecks end ping
     requests.get(HEALTH_CHECK_URL)
+
+    # Wait interval
+    enlapsed_time = int(time.time()) - time_start
+    if(enlapsed_time < INTERVAL):
+        time.sleep(INTERVAL-enlapsed_time)
 
 
 def save_notification_time(buffers_file, key):
@@ -116,11 +121,6 @@ def is_to_notify(buffers_file, key):
 if __name__ == '__main__':
     load_dotenv()
     INTERVAL = int(os.getenv('INTERVAL'))
-    in_execution = False
 
     while True:
-        if(not in_execution):
-            run(in_execution)
-            time.sleep(INTERVAL)
-        else:
-            time.sleep(1)
+        run()
