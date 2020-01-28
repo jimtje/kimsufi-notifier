@@ -2,6 +2,7 @@ import os
 import requests
 import json
 import time
+import logging
 
 from dotenv import load_dotenv
 from WantedModels import WantedModels
@@ -123,4 +124,8 @@ if __name__ == '__main__':
     INTERVAL = int(os.getenv('INTERVAL'))
 
     while True:
-        run()
+        try:
+            run()
+        except Exception as e:
+            # Handle all errors to avoid execution stop
+            logging.exception(e)
