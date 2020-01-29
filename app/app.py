@@ -46,7 +46,9 @@ def run():
         headers = {
             'user-agent': 'kimsufi-notifier',
             'Content-Type': 'application/json',
-            'X-Api-Key': os.getenv('NOTIFICATIONS_API_KEY')
+            'X-Api-Key': os.getenv('NOTIFICATIONS_API_KEY'),
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
         }
 
         # Get handlers from env
