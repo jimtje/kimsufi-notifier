@@ -11,10 +11,6 @@ from WantedModels import WantedModels
 def run():
     time_start = int(time.time())
 
-    # HeathChecks start ping
-    HEALTH_CHECK_URL = os.getenv('HEALTH_CHECK_URL')
-    requests.get(HEALTH_CHECK_URL+ "/start")
-
     wanted_models = WantedModels(os.getenv('WANTED_MODELS'))
 
     # Get Data
@@ -127,7 +123,13 @@ if __name__ == '__main__':
 
     while True:
         try:
+            # HeathChecks start ping
+            HEALTH_CHECK_URL = os.getenv('HEALTH_CHECK_URL')
+            requests.get(HEALTH_CHECK_URL+ "/start")
+
+            # Run
             run()
         except Exception as e:
             # Handle all errors to avoid execution stop
+            requests.get(HEALTH_CHECK_URL+ "/fail")
             logging.exception(e)
