@@ -2,7 +2,7 @@
 This is a simply python 3 script that checks OVH api to see if one or more specified Kimsufi models are aviable
 
 # Requisites
-For the notifications this app uses my [personal-notifications](https://gitlab.com/paolobasso/personal-notifications) service that has to be hosted on a server. Check the [personal-notifications page](https://gitlab.com/paolobasso/personal-notifications) in order to configure it.
+For the notifications this app uses my [personal-notifications](https://github.com/paolobasso99/personal-notifications) service that has to be hosted on a server. Check the [personal-notifications page](https://github.com/paolobasso99/personal-notifications) in order to configure it.
 
 # Setup
 1. It is higtly recomended to use a python `venv`, to setup it, for Linux go inside the project's root and type: `python3 -m venv venv`.
