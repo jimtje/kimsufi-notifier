@@ -1,5 +1,5 @@
 # Kimsufi Notifier
-This is a simply python 3 script that checks OVH api to see if one or more specified Kimsufi models are available
+This is a simply python 3 script that checks OVH api to see if one or more specified [Kimsufi](https://www.kimsufi.com/en/) models are available
 
 # Requisites
 For the notifications this app uses my [personal-notifications](https://github.com/paolobasso99/personal-notifications) service that has to be hosted on a server. Check the [personal-notifications page](https://github.com/paolobasso99/personal-notifications) in order to configure it.
